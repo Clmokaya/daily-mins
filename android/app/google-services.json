@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "638570155329",
+    "project_id": "my-daily-hour",
+    "storage_bucket": "my-daily-hour.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:638570155329:android:aa30c01c8c0b882511e5c0",
+        "android_client_info": {
+          "package_name": "com.cmmapps.flowproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDihhdlbmIiHGDmJNnahJBag6VbqIgISlM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
