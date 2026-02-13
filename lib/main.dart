@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flowproject/firebase_options.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -43,37 +44,132 @@ class _RegisterViewState extends State<RegisterView> {
         switch (snapshot.connectionState) {
           case ConnectionState.done:
             return Scaffold(
-              appBar: AppBar(title: Text('Register')),
-              body: Column(
-                children: [
-                  TextField(
-                    controller: _email,
-                    keyboardType: TextInputType.emailAddress,
-                    enableSuggestions: false,
-                    decoration: InputDecoration(hintText: 'Enter your email'),
-                  ),
-                  TextField(
-                    controller: _password,
-                    enableSuggestions: false,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: 'Enter your password',
+              backgroundColor: Colors.grey,
+
+              body: SafeArea(
+                child: Center(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(height: 50),
+                        Icon(Icons.lock, size: 100),
+                        SizedBox(height: 50),
+                        Text(
+                          'Welcome!',
+                          style: TextStyle(
+                            color: Colors.grey[700],
+                            fontSize: 16,
+                          ),
+                        ),
+                        SizedBox(height: 25),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 25),
+
+                          child: TextField(
+                            controller: _email,
+                            keyboardType: TextInputType.emailAddress,
+                            enableSuggestions: false,
+                            decoration: InputDecoration(
+                              fillColor: Colors.grey.shade300,
+                              filled: true,
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                              ),
+                              hintText: 'Enter your email',
+                            ),
+                          ),
+                        ),
+
+                        SizedBox(height: 10),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 25),
+
+                          child: TextField(
+                            controller: _password,
+
+                            enableSuggestions: false,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              fillColor: Colors.grey.shade300,
+                              filled: true,
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.grey.shade400,
+                                ),
+                              ),
+                              hintText: 'Enter your password',
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 25),
+                        TextButton(
+                          onPressed: () async {
+                            print('Done signing in');
+                            final email = _email.text;
+                            final password = _password.text;
+                            await FirebaseAuth.instance
+                                .createUserWithEmailAndPassword(
+                                  email: email,
+                                  password: password,
+                                );
+                          },
+                          child: Text(
+                            'Register',
+                            style: TextStyle(
+                              color: Colors.black87,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 50),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 25),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Divider(
+                                  thickness: 0.5,
+                                  color: Colors.grey[400],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                ),
+                                child: Text(
+                                  'Or continue with',
+                                  style: TextStyle(color: Colors.grey[700]),
+                                ),
+                              ),
+                              Expanded(
+                                child: Divider(
+                                  thickness: 0.5,
+                                  color: Colors.grey[400],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        Padding(
+                          padding: const EdgeInsets.all(25.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset('lib/images/google.png', height: 40),
+                              SizedBox(width: 10),
+                              Image.asset('lib/images/apple.png', height: 40),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  TextButton(
-                    onPressed: () async {
-                      print('Done signing in');
-                      final email = _email.text;
-                      final password = _password.text;
-                      await FirebaseAuth.instance
-                          .createUserWithEmailAndPassword(
-                            email: email,
-                            password: password,
-                          );
-                    },
-                    child: Text('Register'),
-                  ),
-                ],
+                ),
               ),
             );
           default:
