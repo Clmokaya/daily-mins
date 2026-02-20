@@ -55,12 +55,12 @@ class _NotesViewState extends State<NotesView> {
 }
 
 Future<bool> showLogOutDialog(BuildContext context) {
-  return showDialog<bool>(
+  return showDialog(
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: Text('Logout'),
-        content: Text('Are you sure you want to logout?'),
+        title: Text('Sign out'),
+        content: Text('Are you sure you want to sign out?'),
         actions: [
           TextButton(
             onPressed: () {
@@ -72,7 +72,7 @@ Future<bool> showLogOutDialog(BuildContext context) {
             onPressed: () {
               Navigator.of(context).pop(true);
             },
-            child: Text('logout'),
+            child: Text('Yes'),
           ),
         ],
       );
